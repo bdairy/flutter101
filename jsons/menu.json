@@ -1,0 +1,40 @@
+{
+    "objectID": "123456", // Required by search engine
+    "id": "123456",
+    "name": {
+        "ar": "Menu Item arabic name",
+        "en": "Menu item english english"
+    },
+    "description": {
+        "ar": "Menu Item arabic description",
+        "en": "Menu item english description"
+    },
+    "restaurent": {
+        "id": "restaurent id",
+        "name": {
+            "ar": "Restaurent arabic namee",
+            "en": "Restaurent englinsh name"
+        },
+        "category": { // Not quite sure about this. playing safe!.
+            "id": "Restaurent Category ID",
+            "name": {
+                "ar": "Restaurent Category arabic name",
+                "en": "Restaurent Category english name"
+            }
+        }
+    },
+    "category": {
+        "id": "123456",
+        "name": {
+            "ar": "Menu Category arabic namee",
+            "en": "Menu Category english name"
+        },
+        "availableHours": "??",
+        "icon": "String",
+        "isActive": true
+    },
+    "price": 100.2,
+    "image": "Some image url",
+    
+    "isActive": true
+}

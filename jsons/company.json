@@ -1,0 +1,45 @@
+{
+    "objectID": "12345", // Required by Search engine
+    "id": "12345",
+    "logo": "someurl",
+    "name": {
+        "ar": "Restaurent arabic name",
+        "en": "Restaurent english name"
+    },
+    "owner": {
+        "id": "123456",
+        "name": "The Owner name",
+        "email": "The owner email",
+        "any required summary": "something"
+    }
+    "category": {
+        "id": "1244",
+        "name": {
+            "ar": "Category Arabic Name",
+            "en": "Category English Name"
+        }
+    },
+    "contact": {
+        "email": "restaurentemail@test.com",
+        "phone": "restaurentphone",
+        "mobile": "restaurent mobile",
+        "website": "restaurent website"
+    },
+    "social": {
+        "facebook": "facebook link",
+        "instagram": "instagram link"
+    },
+    "address": {
+        "ar": "Address in arabic",
+        "en": "Address in english"
+    },
+    "qrCodeUrl": "QR code url",
+    "_geoloc": { // This naming is required by search engine
+        "lat": 12345.2345, // Double
+        "lng": 1234.12345 // Double
+    },
+    "createdAt": "Date Object",
+    "createdAt_timestamp": 1606317853664, // Time stamp of the date {Long integer number; milliseconds
+    "updatedAt": "Date Object",
+    "updatedAt_timestamp": 1606317853664 // Time stamp of the date {Long integer number; milliseconds}
+}
