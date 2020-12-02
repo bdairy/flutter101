@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MovieType extends StatelessWidget {
-  final String gener;
-  final Function(String) clickHandler;
+  final Map<String, dynamic> gener;
+  final Function(Map<String, dynamic>) clickHandler;
   MovieType({this.gener, this.clickHandler});
   @override
   Widget build(BuildContext context) {
+    print('building ${gener['name']}');
     return GestureDetector(
       onTap: () {
         this.clickHandler(gener);
@@ -15,7 +16,7 @@ class MovieType extends StatelessWidget {
         width: 100.0,
         height: 100,
         margin: EdgeInsets.all(5),
-        child: Center(child: Text(gener)),
+        child: Center(child: Text(gener['name'])),
       ),
     );
   }
