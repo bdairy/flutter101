@@ -1,11 +1,13 @@
+import 'package:MyFirstApp/models/genre.dart';
 import 'package:MyFirstApp/movies.dart';
 import 'package:MyFirstApp/services/api.service.dart';
+import 'package:MyFirstApp/widgets/genres-list.dart';
 import 'package:flutter/material.dart';
 
 import './movie-type.dart';
 
 class Home extends StatefulWidget {
-  List<dynamic> movieGenures = [];
+  List<Genre> movieGenures = [];
   //   {
   //     'name': 'Comedy',
   //     'color': 'blue',
@@ -55,31 +57,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Map<String, dynamic> selectedMovieGenure;
+  Genre selectedMovieGenure;
   ApiService _service = ApiService();
 
   @override
-  void initState()  {
-    // TODO: implement initState
+  void initState() {
     super.initState();
-     _service.getMovieGenres().then((result) {
-      setState(() {
-              widget.movieGenures = result;
-      });
- 
-     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Building');
-    selectMovieGenure(Map<String, dynamic> genure) {
-      print('Selecte genure is: $selectedMovieGenure');
-      setState(() {
-        selectedMovieGenure = genure;
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text('My First App'),
@@ -93,39 +80,8 @@ class _HomeState extends State<Home> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 50,
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 20),
-              padding: EdgeInsets.only(left: 16),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.movieGenures.length,
-                itemBuilder: (context, index) {
-                  return MovieType(
-                    isSelected: selectedMovieGenure != null &&
-                        widget.movieGenures[index]['name'] ==
-                            selectedMovieGenure['name'],
-                    clickHandler: (Map<String, dynamic> gener) =>
-                        selectMovieGenure(gener),
-                    gener: widget.movieGenures[index],
-                  );
-                },
-              ),
-            ),
-            if (selectedMovieGenure != null)
-              Container(
-                // child: Movies(
-                //   genure: selectedMovieGenure,
-                // ),
-              )
-            else
-              Container(
-                height: 400,
-                child: Container(
-                  color: Colors.red,
-                ),
-              )
+            GenresList(),
+            Movies(),
           ],
         ),
       ),

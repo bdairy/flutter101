@@ -1,47 +1,61 @@
-import 'dart:io';
-
-import 'package:MyFirstApp/services/api.service.dart';
+import 'package:MyFirstApp/system-classes/system-colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import './models/genre.dart';
+import './providers/genre-provider.dart';
 
 class MovieType extends StatelessWidget {
-  final Map<String, dynamic> gener;
-  final Function(Map<String, dynamic>) clickHandler;
-  final bool isSelected;
-  MovieType({this.gener, this.clickHandler, this.isSelected = false});
+  final Genre gener;
+
+  MovieType({
+    this.gener,
+  });
   @override
   Widget build(BuildContext context) {
-    ApiService _service = ApiService();
-    
-    print('building ${gener['name']}');
-
-    Widget defaultChip() {
+    Widget defaultChip(Widget icon) {
       return Chip(
-        backgroundColor: Theme.of(context).accentColor,
+        backgroundColor: SystemColors.accent,
         label: Text(
-          gener['name'],
+          gener.name,
           style: TextStyle(color: Colors.white),
         ),
+        avatar: icon,
       );
     }
 
-    Widget selectedChip() {
-      return Chip(
-        backgroundColor: Theme.of(context).primaryColor,
+    Widget selectedChip(Widget icon) {
+      return  Chip(
+        backgroundColor: SystemColors.primarylight,
         label: Text(
-          gener['name'],
+          gener.name,
           style: TextStyle(color: Colors.white),
         ),
+        avatar: icon,
       );
     }
 
-    return GestureDetector(
-      onTap: () {
-        this.clickHandler(gener);
-      
-      },
-      child: Container(
-          margin: const EdgeInsets.all(5),
-          child: !isSelected ? defaultChip() : selectedChip()),
-    );
+    Widget _switchChip(Genre genre, Widget icon) {
+      var isSelected = genre != null && gener.id == genre.id;
+      if (isSelected) {
+        return selectedChip(icon);
+      } else {
+        return defaultChip(icon);
+      }
+    }
+
+    return Consumer<GenreProvider>(
+        child: Icon(Icons.circle, color: Colors.white, size: 10,), 
+        builder: (context, provider, child) {
+          return GestureDetector(
+            onTap: () {
+              provider.selectGenre(gener);
+            },
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              child: _switchChip(provider.selectedGenre, child),
+            ),
+          );
+        });
   }
 }
