@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:MyFirstApp/models/genre.dart';
+import 'package:MyFirstApp/models/movie-item.dart';
 import 'package:MyFirstApp/models/movie-result.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,9 +19,32 @@ class ApiService {
     return genras;
   }
 
+  Future<MovieItem> getMovieDetails(int movieId) async {
+    var url =
+        'https://api.themoviedb.org/3/movie/$movieId?api_key=$_apiKey&language=en-US';
+    var result = await http.get(url);
+    var map = json.decode(result.body);
+
+    return MovieItem.fromJson(map);
+  }
+
   Future<MovieResult> getMovieByGenre(int genreId) async {
     var url =
         'https://api.themoviedb.org/3/discover/movie?api_key=$_apiKey&with_genres=$genreId&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1';
+    var result = await http.get(url);
+    return MovieResult.fromJson(json.decode(result.body));
+  }
+
+   Future<MovieResult> getPopularMovies() async {
+    var url =
+        'https://api.themoviedb.org/3/movie/popular?api_key=$_apiKey&language=en-US&page=1';
+    var result = await http.get(url);
+    return MovieResult.fromJson(json.decode(result.body));
+  }
+
+    Future<MovieResult> getUpcomingMovies() async {
+    var url =
+        'https://api.themoviedb.org/3/movie/upcoming?api_key=$_apiKey&language=en-US&page=1';
     var result = await http.get(url);
     return MovieResult.fromJson(json.decode(result.body));
   }

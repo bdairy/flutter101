@@ -1,5 +1,5 @@
 import 'package:MyFirstApp/models/genre.dart';
-import 'package:MyFirstApp/movie-type.dart';
+import 'package:MyFirstApp/widgets/movie-type.dart';
 import 'package:MyFirstApp/services/api.service.dart';
 import 'package:flutter/material.dart';
 

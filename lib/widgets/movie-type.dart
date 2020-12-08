@@ -2,8 +2,8 @@ import 'package:MyFirstApp/system-classes/system-colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './models/genre.dart';
-import './providers/genre-provider.dart';
+import '../models/genre.dart';
+import '../providers/genre-provider.dart';
 
 class MovieType extends StatelessWidget {
   final Genre gener;
@@ -25,7 +25,7 @@ class MovieType extends StatelessWidget {
     }
 
     Widget selectedChip(Widget icon) {
-      return  Chip(
+      return Chip(
         backgroundColor: SystemColors.primarylight,
         label: Text(
           gener.name,
@@ -45,10 +45,14 @@ class MovieType extends StatelessWidget {
     }
 
     return Consumer<GenreProvider>(
-        child: Icon(Icons.circle, color: Colors.white, size: 10,), 
+        child: Icon(
+          Icons.circle,
+          color: Colors.white,
+          size: 10,
+        ),
         builder: (context, provider, child) {
           return GestureDetector(
-            onTap: () {
+            onTap: () async {
               provider.selectGenre(gener);
             },
             child: Container(

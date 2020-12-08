@@ -1,4 +1,6 @@
 import 'package:MyFirstApp/providers/genre-provider.dart';
+import 'package:MyFirstApp/providers/tabs-provider.dart';
+import 'package:MyFirstApp/screens/movie-details.screen.dart';
 import 'package:MyFirstApp/system-classes/system-colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,13 +22,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: GenreProvider()),
+        ChangeNotifierProvider.value(value: TabsProvider()),
       ],
       child: MaterialApp(
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.system,
         title: 'My First App',
-        home: Home(),
+        //home: Home(),
+        routes: {
+          '/': (context) => Home(),
+          MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
+        },
       ),
     );
   }
