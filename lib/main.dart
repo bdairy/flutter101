@@ -1,5 +1,7 @@
+import 'package:MyFirstApp/providers/auth-provider.dart';
 import 'package:MyFirstApp/providers/genre-provider.dart';
 import 'package:MyFirstApp/providers/tabs-provider.dart';
+import 'package:MyFirstApp/screens/auth.screen.dart';
 import 'package:MyFirstApp/screens/movie-details.screen.dart';
 import 'package:MyFirstApp/system-classes/system-colors.dart';
 import 'package:flutter/material.dart';
@@ -23,16 +25,20 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: GenreProvider()),
         ChangeNotifierProvider.value(value: TabsProvider()),
+        ChangeNotifierProvider.value(value: AuthProvider())
       ],
-      child: MaterialApp(
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.system,
-        title: 'My First App',
-        //home: Home(),
-        routes: {
-          '/': (context) => Home(),
-          MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
+      child: Consumer<AuthProvider>(
+        builder: (context, authProv, _) {
+          return MaterialApp(
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: ThemeMode.system,
+            title: 'My First App',
+            home: authProv.isAuthenticated ? Home() : AuthScreen(),
+            routes: {
+              MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
+            },
+          );
         },
       ),
     );

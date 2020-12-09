@@ -3,6 +3,7 @@ import 'package:MyFirstApp/home-tabs/popular-movies.dart';
 import 'package:MyFirstApp/home-tabs/settings.dart';
 import 'package:MyFirstApp/home-tabs/upcoming.dart';
 import 'package:MyFirstApp/models/genre.dart';
+import 'package:MyFirstApp/providers/auth-provider.dart';
 import 'package:MyFirstApp/providers/genre-provider.dart';
 import 'package:MyFirstApp/providers/tabs-provider.dart';
 import 'package:MyFirstApp/system-classes/system-colors.dart';
@@ -14,6 +15,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final _tabs = Provider.of<TabsProvider>(context);
     final _genreProvider = Provider.of<GenreProvider>(context, listen: false);
+    final _authProv = Provider.of<AuthProvider>(context, listen: false);
     List<Map<String, dynamic>> _pages = [
       {
         'name': 'Home',
@@ -93,8 +95,13 @@ class Home extends StatelessWidget {
           title: Text(_pages[_tabs.selectedTab]['name']),
           actions: [
             FlatButton(
-              onPressed: () {},
-              child: Text('Logout'),
+              onPressed: () {
+                _authProv.logout();
+              },
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         ),
