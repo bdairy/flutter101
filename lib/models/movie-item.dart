@@ -57,7 +57,7 @@ class MovieItem {
   MovieItem.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
-  //  belongsToCollection = json['belongs_to_collection'];
+    //  belongsToCollection = json['belongs_to_collection'];
     budget = json['budget'];
     if (json['genres'] != null) {
       genres = new List<Genre>();
@@ -72,7 +72,8 @@ class MovieItem {
     originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
-    posterPath = json['poster_path'];
+    posterPath = 'http://image.tmdb.org/t/p/w500/${json['poster_path']}';
+
     if (json['production_companies'] != null) {
       productionCompanies = new List<ProductionCompanies>();
       json['production_companies'].forEach((v) {

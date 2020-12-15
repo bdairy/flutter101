@@ -29,16 +29,17 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProv, _) {
-          return MaterialApp(
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: ThemeMode.system,
-            title: 'My First App',
-            home: authProv.isAuthenticated ? Home() : AuthScreen(),
-            routes: {
-              MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
-            },
-          );
+          return           MaterialApp(
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.system,
+          title: 'My First App',
+          home: authProv.isAuthenticated ? Home() : AuthScreen(),
+          routes: {
+            MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
+          },
+        );
+  
         },
       ),
     );

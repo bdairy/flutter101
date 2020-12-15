@@ -23,31 +23,8 @@ class AuthScreen extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 30),
-                Card(
-                  color: Colors.white,
-                  elevation: 15,
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    width: MediaQuery.of(context).size.width - 100,
-                    height: 400,
-                    child: Column(
-
-                      children: [
-                        Text(
-                          'Join Our App',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 20),
-                        SignupForm()
-
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                SignupForm()
+                 ],
             ),
           ),
         ),

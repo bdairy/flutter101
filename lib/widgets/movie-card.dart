@@ -11,7 +11,7 @@ class MovieCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(
-          MovieDetailsScreen.routeName, arguments: {'movieId': movie.id}
+          MovieDetailsScreen.routeName, arguments: {'movie': movie}
           // MaterialPageRoute(
           //   builder: (context) => MovieDetailsScreen(movieId: movie.id),
           // ),
@@ -35,11 +35,14 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                child: Image.network(
-                  movie.posterPath,
-                  fit: BoxFit.cover,
-                  height: 150,
-                  width: _imgWidth,
+                child: Hero(
+                  tag: movie.id,
+                                  child: Image.network(
+                    movie.posterPath,
+                    fit: BoxFit.cover,
+                    height: 150,
+                    width: _imgWidth,
+                  ),
                 ),
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:MyFirstApp/models/genre.dart';
 import 'package:MyFirstApp/models/http_exception.dart';
 import 'package:MyFirstApp/models/movie-item.dart';
 import 'package:MyFirstApp/models/movie-result.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -74,7 +75,7 @@ class ApiService {
     }
   }
 
-    Future<AuthResult> login(String email, String password) async {
+  Future<AuthResult> login(String email, String password) async {
     try {
       final String url =
           'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$firebaseApiKey';
@@ -93,5 +94,32 @@ class ApiService {
     } catch (e) {
       throw e;
     }
+  }
+
+  static Future<Position> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permantly denied, we cannot request permissions.');
+    }
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission != LocationPermission.whileInUse &&
+          permission != LocationPermission.always) {
+        return Future.error(
+            'Location permissions are denied (actual value: $permission).');
+      }
+    }
+
+    return await Geolocator.getCurrentPosition();
   }
 }
